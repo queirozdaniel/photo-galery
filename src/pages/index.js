@@ -1,7 +1,8 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import Image from 'gatsby-image'
-
+import '../assets/style.css'
+import Header from '../components/Header'
 
 const Index = () => {
 
@@ -11,10 +12,11 @@ const Index = () => {
           edges {
             node {
               childImageSharp {
-                fluid {
+                fluid(maxHeight:240, maxWidth: 480) {
                   ...GatsbyImageSharpFluid
                 }
               }
+              relativePath
             }
           }
         }
@@ -23,10 +25,17 @@ const Index = () => {
 
     return (
         <div>
-            <h1>Galeria de Imagens</h1>
-            {images.allFile.edges.map(image => {
-                return <Image fluid={image.node.childImageSharp.fluid} />
-            })}
+            <Header />
+            <div className='grid max-w-4xl grid-cols-2 gap-4 mx-auto p-6'>
+                {images.allFile.edges.map(image => {
+                    return (
+                        <div className='shadow rounded'>
+                            <Image className='rounded-t' fluid={image.node.childImageSharp.fluid} />
+                            <p className='p-6'>{image.node.relativePath}</p>
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }

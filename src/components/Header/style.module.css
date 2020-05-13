@@ -1,0 +1,9 @@
+.subTitle {
+    text-align: center;
+    @apply text-2xl p-2;
+}
+
+.title {
+    text-align: center;
+    @apply text-5xl shadow-xl p-6 mb-4 font-bold;
+}
